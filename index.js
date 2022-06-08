@@ -6,7 +6,8 @@ const message = document.querySelector("#message");
 // delete movie
 function deleteMovie(event) {
   event.target.parentNode.remove();
-  message.textContent = "Movie Deleted!";
+  message.textContent = `${event.target.parentNode.firstChild.textContent} Deleted!`;
+  revealedMessage();
 }
 
 // cross off movie
@@ -14,10 +15,11 @@ function crossOffMovie(event) {
   event.target.classList.toggle("checked");
 
   if (event.target.classList.contains("checked")) {
-    message.textContent = "Movie Watched!";
+    message.textContent = `${event.target.textContent} watched!`;
   } else {
-    message.textContent = "Movie added back!";
+    message.textContent = `${event.target.textContent} added back!`;
   }
+  revealedMessage();
 }
 
 // add movie
@@ -41,6 +43,13 @@ function addMovie(event) {
   list.appendChild(movie);
 
   inputField.value = "";
+}
+
+function revealedMessage() {
+  message.classList.remove("hide");
+  setTimeout(() => {
+    message.classList.add("hide");
+  }, 1000);
 }
 
 // event listener
